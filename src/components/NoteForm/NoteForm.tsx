@@ -6,13 +6,13 @@ import { NoteModalProps } from "../Modal/Modal";
 interface NoteFormValuesProps {
   title: string;
   content: string;
-  tag: string;
+  tag: "Todo" | "Work" | "Personal" | "Meeting" | "Shopping";
 }
 
 const initialValues: NoteFormValuesProps = {
   title: "",
   content: "",
-  tag: "",
+  tag: "Todo",
 };
 
 const NoteFormSchema = Yup.object().shape({
@@ -20,21 +20,21 @@ const NoteFormSchema = Yup.object().shape({
     .min(3, "Title must be at least 2 characters")
     .max(50, "Title is too long")
     .required("Title is required"),
-  content: Yup.string()
-    .max(500, "Content is too long")
-    .required("Content is required"),
-  tag: Yup.string().required("Please choose your tag"),
+  content: Yup.string().max(500, "Content is too long"),
+  tag: Yup.string()
+    .oneOf(["Todo", "Work", "Personal", "Meeting", "Shopping"])
+    .required("Please choose your tag"),
 });
 
-const NoteForm = ({ onClose }: NoteModalProps) => {
+const NoteForm = ({ onClose, onSubmitNote }: NoteModalProps) => {
   const handleSubmit = (
     values: NoteFormValuesProps,
     actions: FormikHelpers<NoteFormValuesProps>
   ) => {
-    onClose();
+    onSubmitNote(values);
     console.log(values);
-
     actions.resetForm();
+    onClose();
   };
 
   return (
@@ -65,7 +65,6 @@ const NoteForm = ({ onClose }: NoteModalProps) => {
         <div className={css.formGroup}>
           <label htmlFor="tag">Tag</label>
           <Field as="select" id="tag" name="tag" className={css.select}>
-            <option value=""></option>
             <option value="Todo">Todo</option>
             <option value="Work">Work</option>
             <option value="Personal">Personal</option>

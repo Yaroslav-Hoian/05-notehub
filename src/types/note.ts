@@ -5,8 +5,4 @@ export default interface Note {
   tag: string;
 }
 
-type NoteTags = "Todo" | "Work" | "Personal" | "Meeting" | "Shopping";
-
-export default interface NoteTag {
-  noteTag: NoteTags;
-}
+export type NoteTags = "Todo" | "Work" | "Personal" | "Meeting" | "Shopping";

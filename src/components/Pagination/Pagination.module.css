@@ -45,3 +45,8 @@
   color: #fff !important;
   font-weight: 500;
 }
+
+.disabled {
+  opacity: 0.4;
+  cursor: not-allowed !important;
+}

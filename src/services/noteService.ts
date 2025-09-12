@@ -12,13 +12,13 @@ interface fetchNotesProps {
 export interface createNoteProps {
   title: string;
   content: string;
-  tag: string;
+  tag: "Todo" | "Work" | "Personal" | "Meeting" | "Shopping";
 }
 
 async function fetchNotes(
   search: string,
   page: number,
-  perPage = 4
+  perPage = 16
 ): Promise<fetchNotesProps> {
   const request = await axios.get<fetchNotesProps>(baseUrl, {
     params: {
@@ -38,7 +38,12 @@ async function fetchNotes(
 export default fetchNotes;
 
 export async function createNote(note: createNoteProps): Promise<Note> {
-  const postRequest = await axios.post<Note>(baseUrl, note);
+  const postRequest = await axios.post<Note>(baseUrl, note, {
+    headers: {
+      accept: "application/json",
+      Authorization: `Bearer ${myKey}`,
+    },
+  });
 
   return postRequest.data;
 }

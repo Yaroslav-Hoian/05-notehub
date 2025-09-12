@@ -19,6 +19,7 @@ const Pagination = ({ totalPages, page, onPageChange }: PaginationProps) => {
       activeClassName={css.active}
       nextLabel="→"
       previousLabel="←"
+      disabledClassName={css.disabled}
     />
   );
 };
