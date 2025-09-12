@@ -32,7 +32,6 @@ const NoteForm = ({ onClose, onSubmitNote }: NoteModalProps) => {
     actions: FormikHelpers<NoteFormValuesProps>
   ) => {
     onSubmitNote(values);
-    console.log(values);
     actions.resetForm();
     onClose();
   };
