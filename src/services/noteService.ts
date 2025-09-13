@@ -1,5 +1,5 @@
 import axios from "axios";
-import type Note from "../types/note";
+import type { Note, NoteTags } from "../types/note";
 
 const myKey = import.meta.env.VITE_NOTEHUB_TOKEN;
 const baseUrl = "https://notehub-public.goit.study/api/notes";
@@ -9,10 +9,10 @@ interface fetchNotesProps {
   totalPages: number;
 }
 
-export interface createNoteProps {
+interface createNoteProps {
   title: string;
   content: string;
-  tag: "Todo" | "Work" | "Personal" | "Meeting" | "Shopping";
+  tag: NoteTags;
 }
 
 async function fetchNotes(

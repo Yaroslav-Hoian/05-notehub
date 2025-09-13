@@ -1,8 +1,10 @@
-export default interface Note {
+export interface Note {
   id: string;
   title: string;
   content: string;
-  tag: string;
+  createdAt: string;
+  updatedAt: string;
+  tag: NoteTags;
 }
 
 export type NoteTags = "Todo" | "Work" | "Personal" | "Meeting" | "Shopping";
